@@ -19,7 +19,7 @@ export default function NavBarHeader() {
         </p1>
         <p2 class="NavBarLinks">
           <Link to="/">Home</Link> | {"  "}
-          <Link to="/VolcanoList">Volcano List</Link> | {"  "}
+          <Link to="/VolcanoData">Volcano Data</Link> | {"  "}
           <Link to="/Register">Register</Link> | {"  "}
           <Link to="/Login">Login</Link>
         </p2>
