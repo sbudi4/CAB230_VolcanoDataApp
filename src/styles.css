@@ -26,6 +26,12 @@ nav {
   padding-left: 100px;
 }
 
+.HeroImage{
+  height: 300px;
+  width: 300px;
+
+}
+
 h1 {
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;

@@ -3,7 +3,6 @@
 // Importing dependencies
 import NavBarHeader from "./components/NavBarHeader";
 import "./styles.css";
-import hero_image from "./components/images/hero_image.jpg";
 
 export default function App() {
   return (
@@ -16,7 +15,8 @@ export default function App() {
         click 'Volcano List' at the top of the page. Logging in with a
         registered account will allow you to view more data.
       </body>
-      <img src={hero_image} alt="Kilauea volcano of Hawaii erupting" />
+      <img className="HeroImage"
+      src={"https://th.bing.com/th/id/R.07702c8058fea26b9b22bda4b222f855?rik=I6K62TR%2fH1fy%2fg&riu=http%3a%2f%2fen.es-static.us%2fupl%2f2018%2f06%2fkilauea-volcano-fissure-8-6-12-2018-e1529229591565.jpg&ehk=Ofy35TcFFaVTrvFQ2%2fzSwAvFwEEu02v%2bfJzUb6%2f%2f3to%3d&risl=&pid=ImgRaw&r=0"} />
     </div>
   );
 }

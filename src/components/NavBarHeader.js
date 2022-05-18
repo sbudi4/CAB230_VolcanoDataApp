@@ -2,7 +2,6 @@
 
 // Importing dependencies
 import { Link } from "react-router-dom";
-import navbar_icon from "./images/navbar_icon.png";
 
 // Navigation Bar function
 export default function NavBarHeader() {
@@ -12,7 +11,7 @@ export default function NavBarHeader() {
         <p1 class="VolcanoioHeader">
           <img
             className="NavBarIcon"
-            src={navbar_icon}
+            src={"https://cdn-icons-png.flaticon.com/512/1453/1453012.png"}
             alt="A royalty-free volcano icon."
           />
           volcano.io

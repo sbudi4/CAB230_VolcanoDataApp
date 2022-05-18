@@ -1,4 +1,4 @@
-import FetchVolcanoData from "./API/FetchVolcanoData";
+import FetchVolcanoData from "./components/API/FetchVolcanoData";
 import NavBarHeader from "./components/NavBarHeader";
 import "./styles.css";
 
