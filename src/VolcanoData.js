@@ -10,6 +10,7 @@ export default function VolcanoData() {
       <div className="container">
         <h1>Volcano Data</h1>
       </div>
+      <FetchVolcanoData />
       <DataTable />
 
     </div>
