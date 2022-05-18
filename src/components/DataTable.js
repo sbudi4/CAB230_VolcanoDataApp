@@ -1,3 +1,6 @@
+// This file contains the Ag-Grid Table that displays Volcano Data.
+
+// Importing dependencies...
 import React, {useState} from 'react';
 import {AgGridColumn, AgGridReact} from 'ag-grid-react';
 
