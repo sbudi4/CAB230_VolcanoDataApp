@@ -3,10 +3,11 @@
 // Importing dependencies
 import React, {useState, useEffect} from 'react';
 
-// GET Volcano Data using fetch hook
-export default function FetchVolcanoData() {
+// Function for Country Selection dropdown menu
+export default function CountrySelect() {
     const [volcanoData, getVolcanoData] = useState([])
   
+    // GET Volcano Data
     useEffect(() => {
         fetch('http://sefdb02.qut.edu.au:3001/countries')
         .then((res) => res.json())
@@ -17,8 +18,15 @@ export default function FetchVolcanoData() {
     }, [])
   
     return (
-      <div>
-        {volcanoData};
+      // Test that volcano data is an array
+      console.log(volcanoData),
+
+      // Create dropdown menu component
+      <div className='country-select'>
+        <select>
+            <option value="default">--Select a Country--</option>
+            {volcanoData.map((volcanoData) => <option value={volcanoData}>{volcanoData}</option>)}
+          </select>
       </div>
     )
   }

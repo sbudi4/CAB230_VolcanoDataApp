@@ -1,5 +1,4 @@
-import FetchVolcanoData from "./components/API/FetchVolcanoData";
-import CountrySelection from "./components/CountrySelection";
+import CountrySelect from "./components/API/FetchVolcanoData";
 import DataTable from "./components/DataTable";
 import NavBarHeader from "./components/NavBarHeader";
 
@@ -9,14 +8,13 @@ export default function VolcanoData() {
   return (
     <div>
       <NavBarHeader />
-      <div className="container">
+      <div className="volcano-data-grid">
         <h1>Volcano Data</h1>
+          <div className="country-select">
+            <CountrySelect />
+          </div> 
+        <DataTable />
       </div>
-      <FetchVolcanoData />
-      <CountrySelection />
-
-      <div className="DataTable">      <DataTable /></div>
-
     </div>
   );
 }

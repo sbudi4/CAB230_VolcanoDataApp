@@ -4,24 +4,6 @@ import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
 import { useNavigate } from "react-router-dom";
 
-// const table = {
-//   columns: [
-//     { headerName: "Make", field: "make" },
-//     { headerName: "Model", field: "model" },
-//     {
-//       headerName: "Price",
-//       field: "price",
-//       sortable: true,
-//       filter: "agNumberColumnFilter"
-//     }
-//   ],
-//   rowData: [
-//     { make: "Toyota", model: "Camry", price: 28000 },
-//     { make: "Ford", model: "Focus", price: 16700 },
-//     { make: "Hyundai", model: "Kona", price: 23500 }
-//   ]
-// };
-
 export default function DataTable() {
   const [rowData, setRowData] = useState([]);
   const navigate = useNavigate();

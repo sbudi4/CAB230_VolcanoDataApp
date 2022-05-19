@@ -49,3 +49,11 @@ body {
 .DataTable{
   text-align: center;
 }
+
+.volcano-data-grid{
+  text-align: center;
+}
+
+.country-select{
+  text-align: left;
+}
