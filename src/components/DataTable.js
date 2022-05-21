@@ -3,6 +3,7 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
 import { useNavigate } from "react-router-dom";
+import {CountrySelect} from "./FetchVolcanoData"
 
 export default function DataTable() {
   const [rowData, setRowData] = useState([]);
@@ -16,7 +17,7 @@ export default function DataTable() {
   ];
 
   useEffect(() => {
-    fetch("https://openlibrary.org/subjects/drama.json?published_in=2000")
+    fetch("http://openlibrary.org/subjects/drama.json?published_in=2000")
       .then((res) => res.json())
       .then((data) => data.works)
       .then((works) =>
