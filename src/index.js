@@ -4,6 +4,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Importing Pages
+import VolcanoPage from "./components/VolcanoPage";
 import App from "./App";
 import VolcanoData from "./VolcanoData";
 import Register from "./Register";
@@ -17,6 +18,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="/volcano" element={<VolcanoPage />} />
         <Route path="Home" element={<App />} />
         <Route path="VolcanoData" element={<VolcanoData />} />\
         <Route path="Register" element={<Register />} />\

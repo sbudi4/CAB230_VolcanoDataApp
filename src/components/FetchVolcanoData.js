@@ -6,6 +6,7 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
 import { useNavigate } from "react-router-dom";
+import { visitParameterList } from 'typescript';
 
 // Function for Country Select & Data Table
 export default function DataTable() {
@@ -43,8 +44,17 @@ export default function DataTable() {
       { headerName: "ID", field: "id", sortable: false}
     ];
 
-    const [volcanoData, setVolcanoData] = useState([]);
   
+    const volcanoURL = () => {
+      let buffer = "http://sefdb02.qut.edu.au:3001/volcanoes?country="
+      let custom = toString(CountrySelection + withinRange);
+      buffer += custom;
+      return{
+        buffer
+      }
+
+    }
+
     // Fetching Data from /volcanoes endpoint
     useEffect(() => {
       fetch("http://sefdb02.qut.edu.au:3001/volcanoes?country=Japan")
@@ -80,12 +90,9 @@ export default function DataTable() {
     // }, []);
 
     // TESTING CUSTOM LINK
-    const volcanoURL = JSON.stringify("http://sefdb02.qut.edu.au:3001/volcanoes?country=" + CountrySelection + withinRange);
-    console.log(volcanoURL);
 
     // Presenting Components
     return (
-
       // Create dropdown menu components & Data Table
       <div className='country-select'>
         <select onChange={(e) => setCountrySelection(e.target.value)}>
@@ -114,7 +121,8 @@ export default function DataTable() {
             rowData={rowData}
             pagination={true}
             paginationPageSize={15}
-            onRowClicked={(row) => navigate(`/book?title=${row.data.title}`)}/>
+            onRowClicked={(row) => navigate(`/volcano?name=${row.data.name}`)}
+            />
         </div>
       </div>
 
