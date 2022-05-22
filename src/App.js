@@ -13,8 +13,7 @@ export default function App() {
         <p className="homeBody" >
         This is an app that displays information about volcanoes around the
         world. To get started, either login with a registered account or simply
-        click 'Volcano List' at the top of the page. Logging in with a
-        registered account will allow you to view more data.
+        click 'Volcano List' at the top of the page.
         </p>
     </div>
     <img className="HeroImage"

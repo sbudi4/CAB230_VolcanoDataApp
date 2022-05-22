@@ -8,7 +8,7 @@ export default function Register() {
       <div className="container">
         <article>
           <h1>Register</h1>
-          YOU IS good
+          Check back later for this feature!
         </article>
       </div>
     </div>

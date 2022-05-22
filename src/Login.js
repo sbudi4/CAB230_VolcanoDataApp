@@ -8,7 +8,7 @@ export default function Login() {
       <div className="container">
         <article>
           <h1>Login</h1>
-          YOU IS trying
+          Check back later for this feature!
         </article>
       </div>
     </div>
