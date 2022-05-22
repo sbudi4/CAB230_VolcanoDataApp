@@ -8,7 +8,7 @@ import "ag-grid-community/dist/styles/ag-theme-balham.css";
 import { useNavigate } from "react-router-dom";
 
 // Function for Country Select & Data Table
-export default function CountrySelect() {
+export default function DataTable() {
 
     // GET country data from /countries endpoint
   const [countryData, getCountryData] = useState([])
@@ -32,9 +32,6 @@ export default function CountrySelect() {
     // Parse "Within Range" data selection as value
     const [withinRange, setWithinRange] = useState("");
 
-
-
-
     // Creating Data Table
     const [rowData, setRowData] = useState([]);
     const navigate = useNavigate();
@@ -42,48 +39,52 @@ export default function CountrySelect() {
     const columns = [
       { headerName: "Name", field: "name", sortable: true, filter: true },
       { headerName: "Region", field: "region", sortable: true },
-      { headerName: "Subregion", field: "subregion", sortable: true }
+      { headerName: "Subregion", field: "subregion", sortable: true },
+      { headerName: "ID", field: "id", sortable: false}
     ];
 
     const [volcanoData, setVolcanoData] = useState([]);
-
-    const volcanoURL = JSON.stringify("http://sefdb02.qut.edu.au:3001/volcanoes?country="+CountrySelection + withinRange);
   
     // Fetching Data from /volcanoes endpoint
     useEffect(() => {
-      fetch(volcanoURL)
+      fetch("http://sefdb02.qut.edu.au:3001/volcanoes?country=Japan")
         .then((res) => res.json())
-        .then((res) => setVolcanoData(res))
-        // .then((volcanoData => {
-        //   console.log(volcanoData)
-        //   volcanoData.map((volcano) => {
-        //     return{
-        //       name: volcano.name,
-        //       region: volcano.region,
-        //       subregion: volcano.subregion
-        //     };
-        //   })
-        // })
-        // )
-        // .then((volcanoData) => setRowData(volcanoData));
-        // .then((works) =>
-        //   works.map((book) => {
-        //     return {
-        //       name: book.title,
-        //       region: book.authors[0].name,
-        //       subregion: book.edition_count,
-        //     };
-        //   })
-        // )
+        .then((data) => data.map((volcano) =>
+        {
+          return{
+            name: volcano.name,
+            region: volcano.region,
+            subregion: volcano.subregion,
+            id: volcano.id
+
+          }
+        }))
+        .then((volcanoData => setRowData(volcanoData)))
     }, []);
 
-    console.log(volcanoURL);
+    // VERIFIED TABLE CODE////
+    // useEffect(() => {
+    //   fetch("http://sefdb02.qut.edu.au:3001/volcanoes?country=Japan")
+    //     .then((res) => res.json())
+    //     .then((data) => data.map((volcano) =>
+    //     {
+    //       return{
+    //         name: volcano.name,
+    //         region: volcano.region,
+    //         subregion: volcano.subregion,
+    //         id: volcano.id
 
+    //       }
+    //     }))
+    //     .then((volcanoData => setRowData(volcanoData)))
+    // }, []);
+
+    // TESTING CUSTOM LINK
+    const volcanoURL = JSON.stringify("http://sefdb02.qut.edu.au:3001/volcanoes?country=" + CountrySelection + withinRange);
+    console.log(volcanoURL);
 
     // Presenting Components
     return (
-      // Test that volcano data is an array
-      console.log(countryData),
 
       // Create dropdown menu components & Data Table
       <div className='country-select'>
@@ -101,20 +102,18 @@ export default function CountrySelect() {
         </select>
 
         <button>Search</button>
-        
-         {console.log(JSON.stringify("http://sefdb02.qut.edu.au:3001/volcanoes?country="+CountrySelection + withinRange))}
 
         <div
           className="ag-theme-balham"
           style={{
-            height: "300px",
+            height: "500px",
             width: "800px"
           }}>
           <AgGridReact
             columnDefs={columns}
             rowData={rowData}
             pagination={true}
-            paginationPageSize={7}
+            paginationPageSize={15}
             onRowClicked={(row) => navigate(`/book?title=${row.data.title}`)}/>
         </div>
       </div>
