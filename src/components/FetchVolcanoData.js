@@ -5,8 +5,7 @@ import React, {useState, useEffect} from 'react';
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { visitParameterList } from 'typescript';
+import { useNavigate } from "react-router-dom";
 
 // Function for Country Select & Data Table
 export default function DataTable() {
@@ -44,51 +43,31 @@ export default function DataTable() {
       { headerName: "ID", field: "id", sortable: false}
     ];
 
-  
-    const volcanoURL = () => {
-      let buffer = "http://sefdb02.qut.edu.au:3001/volcanoes?country="
-      let custom = toString(CountrySelection + withinRange);
-      buffer += custom;
-      return{
-        buffer
-      }
+
+
+    // Fetching Data from /volcanoes endpoint using Search Button
+    const refreshList = () => {
+
+      // Clear Previous Row Data
+      setRowData([])
+
+      // Set Updated RowData
+      fetch(("http://sefdb02.qut.edu.au:3001/volcanoes?country="+ CountrySelection + withinRange))
+      .then((res) => res.json())
+      .then((data) => data.map((volcano) =>
+      {
+        return{
+          name: volcano.name,
+          region: volcano.region,
+          subregion: volcano.subregion,
+          id: volcano.id
+
+        }
+      }))
+      .then((volcanoData => {
+        setRowData(volcanoData)}))
     }
 
-    // Fetching Data from /volcanoes endpoint
-    useEffect(() => {
-      fetch("http://sefdb02.qut.edu.au:3001/volcanoes?country=Japan")
-        .then((res) => res.json())
-        .then((data) => data.map((volcano) =>
-        {
-          return{
-            name: volcano.name,
-            region: volcano.region,
-            subregion: volcano.subregion,
-            id: volcano.id
-
-          }
-        }))
-        .then((volcanoData => setRowData(volcanoData)))
-    }, []);
-
-    // VERIFIED TABLE CODE////
-    // useEffect(() => {
-    //   fetch("http://sefdb02.qut.edu.au:3001/volcanoes?country=Japan")
-    //     .then((res) => res.json())
-    //     .then((data) => data.map((volcano) =>
-    //     {
-    //       return{
-    //         name: volcano.name,
-    //         region: volcano.region,
-    //         subregion: volcano.subregion,
-    //         id: volcano.id
-
-    //       }
-    //     }))
-    //     .then((volcanoData => setRowData(volcanoData)))
-    // }, []);
-
-    // TESTING CUSTOM LINK
 
     // Presenting Components
     return (
@@ -107,7 +86,7 @@ export default function DataTable() {
           <option value = "&populatedWithin=100km">100 km</option>
         </select>
 
-        <button>Search</button>
+        <button onClick={refreshList}>Search</button>
 
         <div
           className="ag-theme-balham"
@@ -124,7 +103,5 @@ export default function DataTable() {
             />
         </div>
       </div>
-
-      
     )
   }
