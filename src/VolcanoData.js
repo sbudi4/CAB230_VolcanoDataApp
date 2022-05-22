@@ -13,8 +13,6 @@ export default function VolcanoData() {
           <div className="country-select">
             <CountrySelect />
           </div>
-
-        <DataTable />
       </div>
     </div>
   );
