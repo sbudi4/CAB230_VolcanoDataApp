@@ -11,26 +11,26 @@ import { useNavigate } from "react-router-dom";
 export default function CountrySelect() {
 
     // GET country data from /countries endpoint
-  const [volcanoData, getVolcanoData] = useState([])
+  const [countryData, getCountryData] = useState([])
   
     useEffect(() => {
         fetch('http://sefdb02.qut.edu.au:3001/countries')
         .then((res) => res.json())
         .then((res) => {
           console.log(res)
-          getVolcanoData(res)
+          getCountryData(res)
         })
     }, [])
 
     // Parse Country data selection as value
-    const [CountrySelection, setCountrySelection] = useState();
+    const [CountrySelection, setCountrySelection] = useState("");
 
     const handleChange = (event) => {
       setCountrySelection(event.target.value)
     }
 
     // Parse "Within Range" data selection as value
-    const [withinRange, setWithinRange] = useState();
+    const [withinRange, setWithinRange] = useState("");
 
 
 
@@ -44,35 +44,52 @@ export default function CountrySelect() {
       { headerName: "Region", field: "region", sortable: true },
       { headerName: "Subregion", field: "subregion", sortable: true }
     ];
+
+    const [volcanoData, setVolcanoData] = useState([]);
+
+    const volcanoURL = JSON.stringify("http://sefdb02.qut.edu.au:3001/volcanoes?country="+CountrySelection + withinRange);
   
     // Fetching Data from /volcanoes endpoint
     useEffect(() => {
-      fetch("http://openlibrary.org/subjects/drama.json?published_in=2000")
+      fetch(volcanoURL)
         .then((res) => res.json())
-        .then((data) => data.works)
-        .then((works) =>
-          works.map((book) => {
-            return {
-              name: book.title,
-              region: book.authors[0].name,
-              subregion: book.edition_count,
-            };
-          })
-        )
-        .then((books) => setRowData(books));
+        .then((res) => setVolcanoData(res))
+        // .then((volcanoData => {
+        //   console.log(volcanoData)
+        //   volcanoData.map((volcano) => {
+        //     return{
+        //       name: volcano.name,
+        //       region: volcano.region,
+        //       subregion: volcano.subregion
+        //     };
+        //   })
+        // })
+        // )
+        // .then((volcanoData) => setRowData(volcanoData));
+        // .then((works) =>
+        //   works.map((book) => {
+        //     return {
+        //       name: book.title,
+        //       region: book.authors[0].name,
+        //       subregion: book.edition_count,
+        //     };
+        //   })
+        // )
     }, []);
+
+    console.log(volcanoURL);
 
 
     // Presenting Components
     return (
       // Test that volcano data is an array
-      console.log(volcanoData),
+      console.log(countryData),
 
       // Create dropdown menu components & Data Table
       <div className='country-select'>
         <select onChange={(e) => setCountrySelection(e.target.value)}>
             <option value="default">--Select a Country--</option>
-            {volcanoData.map((volcanoData) => <option value={volcanoData}>{volcanoData}</option>)}
+            {countryData.map((countryData) => <option value={countryData}>{countryData}</option>)}
         </select>
 
         <span>Within Range:</span>
@@ -82,6 +99,8 @@ export default function CountrySelect() {
           <option value = "&populatedWithin=30km">30 km</option>
           <option value = "&populatedWithin=100km">100 km</option>
         </select>
+
+        <button>Search</button>
         
          {console.log(JSON.stringify("http://sefdb02.qut.edu.au:3001/volcanoes?country="+CountrySelection + withinRange))}
 
