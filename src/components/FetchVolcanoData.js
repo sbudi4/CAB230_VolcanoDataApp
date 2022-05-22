@@ -5,7 +5,7 @@ import React, {useState, useEffect} from 'react';
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { visitParameterList } from 'typescript';
 
 // Function for Country Select & Data Table
@@ -52,7 +52,6 @@ export default function DataTable() {
       return{
         buffer
       }
-
     }
 
     // Fetching Data from /volcanoes endpoint
@@ -121,7 +120,7 @@ export default function DataTable() {
             rowData={rowData}
             pagination={true}
             paginationPageSize={15}
-            onRowClicked={(row) => navigate(`/volcano?name=${row.data.name}`)}
+            onRowClicked={(row) => navigate(`/volcano?id=${row.data.id}`)}
             />
         </div>
       </div>
